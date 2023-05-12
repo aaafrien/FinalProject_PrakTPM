@@ -1,3 +1,5 @@
+import 'package:finalproject/components/palettes.dart';
+import 'package:finalproject/pages/homepage.dart';
 import 'package:finalproject/pages/login.dart';
 import 'package:finalproject/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Palette.background,
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
-      home: LoginPage(),
+      home: Homepage(),
     );
   }
 }
