@@ -29,7 +29,8 @@ class _NavBarState extends State<NavBar> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.help_rounded), label: 'Help'),
+              icon: Icon(Icons.favorite), label: 'Favorite'),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color(0xffA084CA),

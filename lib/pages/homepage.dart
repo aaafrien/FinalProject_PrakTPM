@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -8,11 +9,23 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  late SharedPreferences prefs;
+
+  @override
+  void initState(){
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset('assets/images/quotable.png', fit: BoxFit.cover),
+          title: Text('Home Page'),
         ),
         body: SingleChildScrollView(
           child: Column(
