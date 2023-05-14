@@ -1,10 +1,16 @@
 import 'package:finalproject/components/palettes.dart';
-import 'package:finalproject/pages/homepage.dart';
-import 'package:finalproject/pages/login.dart';
+import 'package:finalproject/pages/splashscreen.dart';
 import 'package:finalproject/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'model/quotes_lib.dart';
+import 'boxes.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  // Hive.registerAdapter();
+  await Hive.openBox<Quote>(HiveBoxes.quote);
   runApp(const MyApp());
 }
 
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
-      home: Homepage(),
+      home: SplashScreen(),
     );
   }
 }

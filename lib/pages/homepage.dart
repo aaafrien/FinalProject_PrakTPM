@@ -1,9 +1,15 @@
+import 'package:finalproject/controller/quotes_data_source.dart';
 import 'package:finalproject/model/quotes.dart';
+import 'package:finalproject/model/quotes_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:html/parser.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:finalproject/boxes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
+  // final String text;
+
   const Homepage({Key? key}) : super(key: key);
 
   @override
@@ -11,6 +17,19 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  late SharedPreferences prefs;
+  late int totalQuote;
+
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +69,23 @@ class _HomepageState extends State<Homepage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(height: 20),
+              Container(
+                child: FutureBuilder(
+                  // future: QuotesDataSource.instance.loadQuotes(widget.text),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.hasError) {
+                      // return _buildErrorSection();
+                    }
+                    if (snapshot.hasData) {
+                      Quotes quote = Quotes.fromJson(snapshot.data);
+                      // return _buildSuccessSection(quote);
+                    }
+                    return _buildLoadingSection();
+                  },
+                ),
+              )
             ],
           ),
         ),
@@ -57,53 +93,17 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  Widget _buildQuotesSection(
-      final double width, final double height, final List<Quotes> quotes) {
-    return Expanded(
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: quotes.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.only(
-              right: width / 20,
-              left: width / 20,
-            ),
-            padding: EdgeInsets.all(16.0),
-            width: width / 1.1,
-            height: height / 5,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            ),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    quotes[index].quote.toString(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 18.0,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    quotes[index].author.toString(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+  Widget _buildLoadingSection() {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
+
+  // Widget _buildErrorSection() {
+  //   if (widget.text.isEmpty) {
+  //     return const Text("Search bar cannot be Empty");
+  //   } else {
+  //     return const Text("Error acquired");
+  //   }
+  // }
 }

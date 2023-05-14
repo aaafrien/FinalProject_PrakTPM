@@ -1,5 +1,7 @@
+import 'package:finalproject/components/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,8 +11,37 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIsLogin();
+  }
+
+  void checkIsLogin() async {
+    prefs = await SharedPreferences.getInstance();
+
+    bool? isLogin = (prefs.getString('username') != null) ? true : false;
+
+    if (isLogin && mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const NavBar(),
+          ),
+          (route) => false);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +96,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 30),
             MaterialButton(
-              onPressed: () {
-                if (usernameController.text == "user") {
-                  if (passwordController.text == "user") {
-                    Navigator.popAndPushNamed(context, '/navbar');
+              onPressed: () async {
+                if (_usernameController.text == "user") {
+                  if (_passwordController.text == "user") {
+                    await prefs.setString('username', _usernameController.text);
+                    if(mounted){
+                      Navigator.popAndPushNamed(context, '/navbar');
+                    }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -136,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _usernameField() {
     return TextField(
-      controller: usernameController,
+      controller: _usernameController,
       cursorColor: Color(0xff645CAA),
       decoration: InputDecoration(
         labelText: 'Username',
@@ -174,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _passwordField() {
     return TextField(
       obscureText: true,
-      controller: passwordController,
+      controller: _passwordController,
       cursorColor: Color(0xff645CAA),
       decoration: InputDecoration(
         labelText: 'Password',

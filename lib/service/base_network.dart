@@ -1,11 +1,15 @@
+// sebagai class untuk membentuk link request dari API.
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class BaseNetwork {
-  static final String baseUrl = "https://api-ninjas.com/api/";
+  static final String baseUrl = "https://favqs.com/api/qotd"; // API nya
 
+  // get() untuk request isi dari API dari baseUrl dan hasil respon akan dikirim
+  // ke method _processResponse() dengan parameter response
   static Future<Map<String, dynamic>> get(String partUrl) async {
-    final String fullUrl = baseUrl + "/" + partUrl;
+    final String fullUrl = baseUrl + partUrl;
 
     debugPrint("BaseNetwork - fullUrl : $fullUrl");
 
@@ -16,6 +20,7 @@ class BaseNetwork {
     return _processResponse(response);
   }
 
+  // untuk mengecek isi dari response yang sekarang berbentuk .json
   static Future<Map<String, dynamic>> _processResponse(
       http.Response response) async {
     final body = response.body;
@@ -28,6 +33,7 @@ class BaseNetwork {
     }
   }
 
+  // untuk menuliskan hasil debug ke console.
   static void debugPrint(String value) {
     print("[BASE_NETWORK] - $value");
   }
