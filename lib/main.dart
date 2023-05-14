@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Palette.background,
+        fontFamily: "Poppins",
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
       home: SplashScreen(),
