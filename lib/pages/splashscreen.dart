@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xffFFD04A),
       body: Container(
-          alignment: Alignment.center, child: Image.asset("assets/images/beam-remote-work-from-home.png")),
+          alignment: Alignment.center, child: Image.asset("assets/images/quotable.png")),
     );
   }
 }
