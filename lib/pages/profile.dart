@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,7 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Group Profile"),
-        backgroundColor: Color(0xffEBC7E8),
         actions: [
           IconButton(
             onPressed: () async {
@@ -65,69 +65,67 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+        child: Padding(
+          padding: EdgeInsets.all(20),
           child: Column(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2,
+                height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/profile.jpg'),
-                    fit: BoxFit.fitWidth,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(4),
-                    topRight: Radius.circular(4),
-                  ),
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/images/profile.jpg')),
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  color: Colors.redAccent,
                 ),
               ),
+              SizedBox(height: 10),
               Card(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 10, top: 10),
-                    child: Text(
-                      "Member 1",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: Text(
+                        "Member 1",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Nama"),
-                            Text("NIM"),
-                            Text("TTL"),
-                            Text("Goals"),
-                          ],
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Nama"),
+                              Text("NIM"),
+                              Text("TTL"),
+                              Text("Goals"),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(": Novia Adelia"),
-                            Text(": 123200023"),
-                            Text(": Medan, 12 November 2002"),
-                            Text(": Web & Mobile Developer"),
-                          ],
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(": Novia Adelia"),
+                              Text(": 123200023"),
+                              Text(": Medan, 12 November 2002"),
+                              Text(": Web & Mobile Developer"),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
+                      ],
+                    )
+                  ],
+                ),
+              ),
               Card(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Text(": Afrien Khoirunnisa Shobar"),
                             Text(": 123200093"),
                             Text(": Sleman, 29 April 2002"),
-                            Text(": To be UI/UX Designer"),
+                            Text(": UI/UX Designer"),
                           ],
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:finalproject/components/palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:finalproject/pages/favorite.dart';
 import 'package:finalproject/pages/homepage.dart';
@@ -25,7 +26,7 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xffEBC7E8),
+        backgroundColor: Palette.mainColor,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
@@ -33,7 +34,7 @@ class _NavBarState extends State<NavBar> {
           BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xffA084CA),
+        selectedItemColor: Color(0xff000000),
         onTap: _onItemTapped,
       ),
     );
