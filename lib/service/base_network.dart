@@ -1,40 +1,23 @@
-// sebagai class untuk membentuk link request dari API.
-
 import 'dart:convert';
+import 'package:finalproject/model/quote.dart';
 import 'package:http/http.dart' as http;
 
 class BaseNetwork {
-  static final String baseUrl = "https://favqs.com/api/qotd"; // API nya
+  Future<List<Quotes?>> fetchQuotes(String name) async {
+    var url = Uri.parse('https://favqs.com/api/quotes/');
+    var response = await http.get(url,
+        headers: {'Authorization': 'Token cbefbc35153023a24355ad07559df86d'});
 
-  // get() untuk request isi dari API dari baseUrl dan hasil respon akan dikirim
-  // ke method _processResponse() dengan parameter response
-  static Future<Map<String, dynamic>> get(String partUrl) async {
-    final String fullUrl = baseUrl + partUrl;
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    debugPrint("BaseNetwork - fullUrl : $fullUrl");
-
-    final response = await http.get(Uri.parse(fullUrl));
-
-    debugPrint("BaseNetwork - response : ${response.body}");
-
-    return _processResponse(response);
-  }
-
-  // untuk mengecek isi dari response yang sekarang berbentuk .json
-  static Future<Map<String, dynamic>> _processResponse(
-      http.Response response) async {
-    final body = response.body;
-    if (body.isNotEmpty) {
-      final jsonBody = json.decode(body);
-      return jsonBody;
-    } else {
-      print("processResponse error");
-      return {"error": true};
+    List<Quotes?> items = [];
+    for (var i in data['quotes']) {
+      if (i != null) {
+        items.add(Quotes.fromJson(i));
+      }
     }
-  }
 
-  // untuk menuliskan hasil debug ke console.
-  static void debugPrint(String value) {
-    print("[BASE_NETWORK] - $value");
+    print(response);
+    return items;
   }
 }
