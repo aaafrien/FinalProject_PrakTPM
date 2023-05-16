@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class BaseNetwork {
   Future<List<Quotes?>> fetchQuotes() async {
-    var url = Uri.parse('https://favqs.com/api/');
+    var url = Uri.parse("https://favqs.com/api/quotes");
     var response = await http.get(url,
         headers: {'Authorization': 'Token cbefbc35153023a24355ad07559df86d'});
 

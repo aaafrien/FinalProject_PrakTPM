@@ -44,7 +44,6 @@ class _HomepageState extends State<Homepage> {
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
@@ -73,11 +72,15 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
-              "Your Own Quotes",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Add Quote",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],

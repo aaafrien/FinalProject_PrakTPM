@@ -61,25 +61,3 @@ class Quotes {
         "body": body,
       };
 }
-
-class Qotd {
-  DateTime qotdDate;
-  Quotes quote;
-
-  Qotd({
-    required this.qotdDate,
-    required this.quote,
-  });
-
-  factory Qotd.fromJson(Map<String, dynamic> json) => Qotd(
-        qotdDate: json["qotdDate"],
-        quote: json["quote"],
-      );
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['qotd_date'] = qotdDate;
-    _data['quote'] = quote.toJson();
-    return _data;
-  }
-}
