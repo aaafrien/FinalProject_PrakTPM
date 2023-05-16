@@ -1,37 +1,39 @@
 import 'dart:convert';
 
-List<Quotes> quotesFromJson(String str) => List<Quotes>.from(json.decode(str).map((x) => Quotes.fromJson(x)));
+List<Quotes> quotesFromJson(String str) =>
+    List<Quotes>.from(json.decode(str).map((x) => Quotes.fromJson(x)));
 
-String quotesToJson(List<Quotes> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String quotesToJson(List<Quotes> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Quotes {
-    int id;
-    bool dialogue;
-    bool private;
-    List<String> tags;
-    String url;
-    int favoritesCount;
-    int upvotesCount;
-    int downvotesCount;
-    String author;
-    String authorPermalink;
-    String body;
+  int id;
+  bool dialogue;
+  bool private;
+  List<String> tags;
+  String url;
+  int favoritesCount;
+  int upvotesCount;
+  int downvotesCount;
+  String author;
+  String authorPermalink;
+  String body;
 
-    Quotes({
-        required this.id,
-        required this.dialogue,
-        required this.private,
-        required this.tags,
-        required this.url,
-        required this.favoritesCount,
-        required this.upvotesCount,
-        required this.downvotesCount,
-        required this.author,
-        required this.authorPermalink,
-        required this.body,
-    });
+  Quotes({
+    required this.id,
+    required this.dialogue,
+    required this.private,
+    required this.tags,
+    required this.url,
+    required this.favoritesCount,
+    required this.upvotesCount,
+    required this.downvotesCount,
+    required this.author,
+    required this.authorPermalink,
+    required this.body,
+  });
 
-    factory Quotes.fromJson(Map<String, dynamic> json) => Quotes(
+  factory Quotes.fromJson(Map<String, dynamic> json) => Quotes(
         id: json["id"],
         dialogue: json["dialogue"],
         private: json["private"],
@@ -43,9 +45,9 @@ class Quotes {
         author: json["author"],
         authorPermalink: json["author_permalink"],
         body: json["body"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "dialogue": dialogue,
         "private": private,
@@ -57,5 +59,27 @@ class Quotes {
         "author": author,
         "author_permalink": authorPermalink,
         "body": body,
-    };
+      };
+}
+
+class Qotd {
+  DateTime qotdDate;
+  Quotes quote;
+
+  Qotd({
+    required this.qotdDate,
+    required this.quote,
+  });
+
+  factory Qotd.fromJson(Map<String, dynamic> json) => Qotd(
+        qotdDate: json["qotdDate"],
+        quote: json["quote"],
+      );
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['qotd_date'] = qotdDate;
+    _data['quote'] = quote.toJson();
+    return _data;
+  }
 }
