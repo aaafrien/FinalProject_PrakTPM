@@ -5,14 +5,17 @@ part 'quotes_lib.g.dart'; // generate file using build_runner
 @HiveType(typeId: 0)
 class Quote extends HiveObject {
   @HiveField(0)
-  String? id;
-  @HiveField(1)
   final String author;
+
+  @HiveField(1)
+  final String quotes;
+  
   @HiveField(2)
-  final String body;
+  final DateTime time;
 
   Quote({
     required this.author,
-    required this.body,
+    required this.quotes,
+    required this.time,
   });
 }
