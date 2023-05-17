@@ -9,29 +9,29 @@ String quotesToJson(List<Quotes> data) =>
 class Quotes {
   int id;
   bool dialogue;
-  bool private;
+  bool? private;
   List<String> tags;
   String url;
   int favoritesCount;
   int upvotesCount;
   int downvotesCount;
   String? author;
-  String authorPermalink;
-  String body;
+  String? authorPermalink;
+  String? body;
   String? source;
 
   Quotes({
     required this.id,
     required this.dialogue,
-    required this.private,
+    this.private,
     required this.tags,
     required this.url,
     required this.favoritesCount,
     required this.upvotesCount,
     required this.downvotesCount,
     this.author,
-    required this.authorPermalink,
-    required this.body,
+    this.authorPermalink,
+    this.body,
     this.source,
   });
 

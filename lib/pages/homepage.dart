@@ -15,6 +15,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   late SharedPreferences prefs;
   late int totalQuote;
+  String search = "";
 
   @override
   void initState() {
@@ -29,39 +30,14 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     final BaseNetwork baseNetwork = BaseNetwork();
-
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.format_quote_rounded),
-            Text(
-              "Quotable",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
+      appBar: appBarHomepage(),
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 60,
-              child: TextFormField(
-                style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search_outlined),
-                    hintText: 'search quotes',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ))),
-              ),
-            ),
+            searchContainer(),
             SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
@@ -82,15 +58,23 @@ class _HomepageState extends State<Homepage> {
             SizedBox(height: 20),
             Expanded(
               child: FutureBuilder(
-                future: baseNetwork.fetchQuotes(),
+                initialData: [],
+                future: search != ""
+                    ? baseNetwork.fetchQuotesTag(search)
+                    : baseNetwork.fetchQuotes(),
                 builder: (context, AsyncSnapshot snapshot) {
+                  // print(snapshot.data.length == 0);
                   if (snapshot.data == null) {
-                    return const Center(
+                    return Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (!snapshot.hasData) {
-                    return const Center(
-                      child: Text('No data'),
+                    return Center(
+                      child: Text('No Quotes'),
+                    );
+                  } else if (snapshot.data.length == 0) {
+                    return Center(
+                      child: Text('No Quotes'),
                     );
                   } else {
                     return ListView.builder(
@@ -139,6 +123,43 @@ class _HomepageState extends State<Homepage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  AppBar appBarHomepage() {
+    return AppBar(
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.format_quote_rounded),
+          Text(
+            "Quotable",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container searchContainer() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 60,
+      child: TextFormField(
+        onFieldSubmitted: (value) => {
+          setState(() {
+            search = value;
+          })
+        },
+        style: TextStyle(fontSize: 14),
+        decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search_outlined),
+            hintText: 'search quotes',
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ))),
       ),
     );
   }

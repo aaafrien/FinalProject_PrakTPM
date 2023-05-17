@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:finalproject/model/quotes_lib.dart';
 import 'package:finalproject/pages/add_quotes.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import '../boxes.dart';
 
 class OwnQuotePage extends StatefulWidget {
