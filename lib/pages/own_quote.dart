@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/model/quotes_lib.dart';
 import 'package:finalproject/pages/add_quotes.dart';
 import 'package:flutter/material.dart';
@@ -26,23 +27,10 @@ class _OwnQuotePageState extends State<OwnQuotePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Own Quote"),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddQuote(),
-                ),
-              );
-            },
-          )
-        ],
+        title: Text(
+          "Own Quotes",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
       body: ValueListenableBuilder<Box>(
         valueListenable: _quoteLib.listenable(),
@@ -58,12 +46,37 @@ class _OwnQuotePageState extends State<OwnQuotePage> {
               log(value.length.toString());
               Quote quotes = value.getAt(index);
               return Dismissible(
-                key: UniqueKey(),
-                child: ListTile(
-                  title: Text(quotes.quotes),
-                  subtitle: Text(quotes.author + quotes.time.toString()),
-                ),
-              );
+                  key: UniqueKey(),
+                  child: Card(
+                    margin: EdgeInsets.all(8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                            child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(quotes.quotes, style: TextStyle(
+                                        fontSize: 16, fontWeight: FontWeight.w600), textAlign: TextAlign.justify,),
+                              Text(quotes.author),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    quotes.time.toString(),
+                                    style: TextStyle(
+                                        fontSize: 12, color: Palette.mainColor),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ))
+                      ],
+                    ),
+                  ));
             },
           );
         },

@@ -1,13 +1,13 @@
+import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/model/quotes_lib.dart';
+import 'package:finalproject/pages/own_quote.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../boxes.dart';
 
 class AddQuote extends StatefulWidget {
-  const AddQuote({
-    Key? key
-  }) : super(key: key);
+  const AddQuote({Key? key}) : super(key: key);
 
   @override
   State<AddQuote> createState() => _AddQuoteState();
@@ -44,19 +44,32 @@ class _AddQuoteState extends State<AddQuote> {
         padding: EdgeInsets.all(10),
         child: Form(
             key: formKey,
-            child: Column(
-              children: [
-                _authorField(),
-                _quotesField(),
-                ElevatedButton(
-                  onPressed: () {
-                    if(formKey.currentState!.validate()){
-                      _quoteLib.add(Quote(author: _authorController.text, quotes: _quoteController.text, time: DateTime.now()));
-                    }
-                  },
-                  child: Text("Add Quote"),
-                )
-              ],
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  _authorField(),
+                  SizedBox(height: 15),
+                  _quotesField(),
+                  SizedBox(height: 15),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        _quoteLib.add(Quote(
+                            author: _authorController.text,
+                            quotes: _quoteController.text,
+                            time: DateTime.now()));
+                      }
+                      _quoteController.clear();
+                      _authorController.clear();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/navbar', (route) => false);
+                    },
+                    child: Text("Add Quote",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
             )),
       ),
     );
@@ -69,7 +82,7 @@ class _AddQuoteState extends State<AddQuote> {
         labelText: 'Author',
         hintText: 'author',
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
@@ -84,12 +97,14 @@ class _AddQuoteState extends State<AddQuote> {
 
   Widget _quotesField() {
     return TextFormField(
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
       controller: _quoteController,
       decoration: InputDecoration(
         labelText: 'Quote',
         hintText: 'quote',
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
