@@ -1,4 +1,5 @@
 import 'package:finalproject/components/palettes.dart';
+import 'package:finalproject/pages/add_quotes.dart';
 import 'package:finalproject/pages/detail_quotes.dart';
 import 'package:finalproject/service/base_network.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,14 @@ class _HomepageState extends State<Homepage> {
               width: MediaQuery.of(context).size.width,
               height: 60,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddQuote(),
+                    ),
+                  );
+                },
                 child: Text(
                   "Add Quote",
                   style: TextStyle(fontWeight: FontWeight.bold),

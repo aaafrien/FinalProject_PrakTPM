@@ -25,21 +25,24 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        // backgroundColor: Palette.mainColor,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border_outlined), label: 'Favorites'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notes_rounded), label: 'Own Quotes'),
-          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Profile'),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xff000000),
-        onTap: _onItemTapped,
-      ),
-    );
+        body: pages[_selectedIndex],
+        bottomNavigationBar: Theme(
+          data: ThemeData(canvasColor: Palette.mainColor),
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite), label: 'Favorite'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.notes_rounded), label: 'Own Quotes'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.group), label: 'Profile'),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Color(0xffF0EDD4),
+            unselectedItemColor: Color(0xffF9FBE7),
+            onTap: _onItemTapped,
+          ),
+        ));
   }
 }
