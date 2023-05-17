@@ -9,7 +9,7 @@ import 'boxes.dart';
 
 void main() async {
   await Hive.initFlutter();
-  // Hive.registerAdapter();
+  Hive.registerAdapter(QuoteAdapter());
   await Hive.openBox<Quote>(HiveBoxes.quote);
   runApp(const MyApp());
 }

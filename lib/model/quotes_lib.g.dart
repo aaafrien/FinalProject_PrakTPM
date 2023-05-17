@@ -17,9 +17,10 @@ class QuoteAdapter extends TypeAdapter<Quote> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Quote(
-      author: fields[1] as String,
-      body: fields[2] as String,
-    )..id = fields[0] as String?;
+      author: fields[0] as String,
+      quotes: fields[1] as String,
+      time: fields[2] as DateTime,
+    );
   }
 
   @override
@@ -27,11 +28,11 @@ class QuoteAdapter extends TypeAdapter<Quote> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
       ..write(obj.author)
+      ..writeByte(1)
+      ..write(obj.quotes)
       ..writeByte(2)
-      ..write(obj.body);
+      ..write(obj.time);
   }
 
   @override
