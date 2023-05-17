@@ -15,9 +15,10 @@ class Quotes {
   int favoritesCount;
   int upvotesCount;
   int downvotesCount;
-  String author;
+  String? author;
   String authorPermalink;
   String body;
+  String? source;
 
   Quotes({
     required this.id,
@@ -28,9 +29,10 @@ class Quotes {
     required this.favoritesCount,
     required this.upvotesCount,
     required this.downvotesCount,
-    required this.author,
+    this.author,
     required this.authorPermalink,
     required this.body,
+    this.source,
   });
 
   factory Quotes.fromJson(Map<String, dynamic> json) => Quotes(

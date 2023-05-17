@@ -1,4 +1,3 @@
-import 'package:finalproject/components/navbar.dart';
 import 'package:flutter/material.dart';
 
 class DetailQuotes extends StatelessWidget {
@@ -12,23 +11,6 @@ class DetailQuotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          Container(
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NavBar(),
-                    ),
-                  ),
-                  icon: Icon(Icons.arrow_back_ios_new),
-                ),
-              ],
-            ),
-          )
-        ],
         title: Text("Quotes by ${author}"),
       ),
       body: Container(
