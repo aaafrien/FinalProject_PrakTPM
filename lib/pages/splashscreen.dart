@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/pages/login.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({ Key? key }) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -22,9 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffECCDB4),
+      backgroundColor: Palette.mainColor,
       body: Container(
-          alignment: Alignment.center, child: Image.asset("assets/images/quotable.png")),
+        alignment: Alignment.center,
+        child: Text(
+          "Quotable",
+          style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }

@@ -8,10 +8,10 @@ class BaseNetwork {
     var response = await http.get(url,
         headers: {'Authorization': 'Token cbefbc35153023a24355ad07559df86d'});
 
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    var data = await jsonDecode(utf8.decode(response.bodyBytes))['quotes'];
 
     List<Quotes?> items = [];
-    for (var i in data['quotes']) {
+    for (var i in data) {
       if (i != null) {
         items.add(Quotes.fromJson(i));
       }

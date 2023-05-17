@@ -1,5 +1,5 @@
 import 'package:finalproject/components/palettes.dart';
-import 'package:finalproject/pages/list_quotes.dart';
+import 'package:finalproject/pages/favorite.dart';
 import 'package:flutter/material.dart';
 import 'package:finalproject/pages/homepage.dart';
 import 'package:finalproject/pages/profile.dart';
@@ -15,7 +15,7 @@ class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   List pages = [
     Homepage(),
-    ListQuotes(),
+    FavoriteQuotes(),
     ProfilePage(),
   ];
 
@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.format_quote_rounded), label: 'Quotes'),
+              icon: Icon(Icons.favorite_border_outlined), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,

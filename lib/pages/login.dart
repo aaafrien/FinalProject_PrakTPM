@@ -1,4 +1,5 @@
 import 'package:finalproject/components/navbar.dart';
+import 'package:finalproject/components/palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Forgot password?',
                     style: TextStyle(
-                        color: Color(0xff645CAA),
+                        color: Palette.mainColor,
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400),
                   ),
@@ -100,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                 if (_usernameController.text == "user") {
                   if (_passwordController.text == "user") {
                     await prefs.setString('username', _usernameController.text);
-                    if(mounted){
+                    if (mounted) {
                       Navigator.popAndPushNamed(context, '/navbar');
                     }
                   } else {
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
               height: 45,
-              color: Color(0xff645CAA),
+              color: Palette.mainColor,
               child: Text(
                 "Login",
                 style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -138,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   'Don\'t have an account?',
                   style: TextStyle(
-                    color: Color(0xffBFACE0),
+                    color: Palette.mainColor,
                     fontSize: 14.0,
                   ),
                 ),
@@ -171,34 +172,34 @@ class _LoginPageState extends State<LoginPage> {
   Widget _usernameField() {
     return TextField(
       controller: _usernameController,
-      cursorColor: Color(0xff645CAA),
+      cursorColor: Palette.mainColor,
       decoration: InputDecoration(
         labelText: 'Username',
         hintText: 'username',
         labelStyle: TextStyle(
-          color: Color(0xff645CAA),
+          color: Palette.mainColor,
           fontSize: 14.0,
           fontWeight: FontWeight.w400,
         ),
         hintStyle: TextStyle(
-          color: Color(0xffBFACE0),
+          color: Palette.mainColor,
           fontSize: 14.0,
         ),
         prefixIcon: Icon(
           Iconsax.user,
-          color: Color(0xff645CAA),
+          color: Palette.mainColor,
           size: 18,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
         floatingLabelStyle: TextStyle(
-          color: Color(0xffBFACE0),
+          color: Palette.mainColor,
           fontSize: 18.0,
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
@@ -209,34 +210,34 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
       obscureText: true,
       controller: _passwordController,
-      cursorColor: Color(0xff645CAA),
+      cursorColor: Palette.mainColor,
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'password',
         labelStyle: TextStyle(
-          color: Color(0xff645CAA),
+          color: Palette.mainColor,
           fontSize: 14.0,
           fontWeight: FontWeight.w400,
         ),
         hintStyle: TextStyle(
-          color: Color(0xffBFACE0),
+          color: Palette.mainColor,
           fontSize: 14.0,
         ),
         prefixIcon: Icon(
           Iconsax.lock,
-          color: Color(0xff645CAA),
+          color: Palette.mainColor,
           size: 18,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
         floatingLabelStyle: TextStyle(
-          color: Color(0xffBFACE0),
+          color: Palette.mainColor,
           fontSize: 18.0,
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffBFACE0), width: 1.5),
+          borderSide: BorderSide(color: Palette.mainColor, width: 1.5),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),

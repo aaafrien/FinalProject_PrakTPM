@@ -76,7 +76,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       fit: BoxFit.cover,
                       image: AssetImage('assets/images/profile.jpg')),
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  color: Colors.redAccent,
                 ),
               ),
               SizedBox(height: 10),
