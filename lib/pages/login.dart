@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     if (isLogin && mounted) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const NavBar(),
+            builder: (context) => NavBar(),
           ),
           (route) => false);
     }

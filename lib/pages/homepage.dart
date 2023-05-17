@@ -29,35 +29,61 @@ class _HomepageState extends State<Homepage> {
     final BaseNetwork baseNetwork = BaseNetwork();
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Container(
-            child: FutureBuilder(
-              future: baseNetwork.fetchQuotes('friend'),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (!snapshot.hasData) {
-                  return const Center(
-                    child: Text('No data'),
-                  );
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(snapshot.data![index].body),
-                        subtitle: Text(snapshot.data[index].author),
-                      );
-                    },
-                  );
-                }
-              },
+      appBar: AppBar(
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.format_quote_rounded),
+            Text(
+              "Quotable",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: TextFormField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search_outlined),
+                    hintText: 'search quotes',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ))),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Quotes of The Day",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Add Quote",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
