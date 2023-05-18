@@ -2,7 +2,6 @@ import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/model/quotes_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../boxes.dart';
 
