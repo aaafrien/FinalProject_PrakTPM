@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Forgot password?',
                     style: TextStyle(
-                        color: Palette.mainColor,
+                        color: Color(0xffFEA1A1),
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400),
                   ),
@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Register',
                     style: TextStyle(
-                      color: Color(0xffA084CA),
+                      color: Color(0xffFEA1A1),
                       fontSize: 14.0,
                     ),
                   ),
