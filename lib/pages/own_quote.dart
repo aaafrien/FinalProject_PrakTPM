@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/model/quotes_lib.dart';
-import 'package:finalproject/pages/add_quotes.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -27,10 +26,7 @@ class _OwnQuotePageState extends State<OwnQuotePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Own Quotes",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
+        title: Text("Own Quotes"),
       ),
       body: ValueListenableBuilder<Box>(
         valueListenable: _quoteLib.listenable(),
@@ -58,8 +54,12 @@ class _OwnQuotePageState extends State<OwnQuotePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(quotes.quotes, style: TextStyle(
-                                        fontSize: 16, fontWeight: FontWeight.w600), textAlign: TextAlign.justify,),
+                              Text(
+                                quotes.quotes,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
+                                textAlign: TextAlign.justify,
+                              ),
                               Text(quotes.author),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,

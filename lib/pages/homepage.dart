@@ -1,6 +1,5 @@
 import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/pages/add_quotes.dart';
-import 'package:finalproject/pages/detail_quotes.dart';
 import 'package:finalproject/service/base_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -71,7 +70,6 @@ class _HomepageState extends State<Homepage> {
                     ? baseNetwork.fetchQuotesTag(search)
                     : baseNetwork.fetchQuotes(),
                 builder: (context, AsyncSnapshot snapshot) {
-                  // print(snapshot.data.length == 0);
                   if (snapshot.data == null) {
                     return Center(
                       child: CircularProgressIndicator(),
@@ -89,14 +87,35 @@ class _HomepageState extends State<Homepage> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailQuotes(
-                                  body: snapshot.data![index].body,
-                                  author: snapshot.data![index].author),
-                            ),
-                          ),
+                          onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: Color(0xffF9FBE7),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Container(
+                                    constraints: BoxConstraints(maxHeight: 350),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot.data![index].body,
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          SizedBox(height: 20),
+                                          Text("by " +
+                                              snapshot.data![index].author),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
                           child: Card(
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,16 +156,7 @@ class _HomepageState extends State<Homepage> {
 
   AppBar appBarHomepage() {
     return AppBar(
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.format_quote_rounded),
-          Text(
-            "Quotable",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
+      title: Text("Quotable"),
     );
   }
 
@@ -162,12 +172,14 @@ class _HomepageState extends State<Homepage> {
         },
         style: TextStyle(fontSize: 14),
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search_outlined),
-            hintText: 'search quotes',
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
+          prefixIcon: Icon(Icons.search_outlined),
+          hintText: 'search quotes',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
-            ))),
+            ),
+          ),
+        ),
       ),
     );
   }

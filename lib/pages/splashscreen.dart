@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:finalproject/components/palettes.dart';
 import 'package:finalproject/pages/login.dart';
 import 'package:flutter/material.dart';
