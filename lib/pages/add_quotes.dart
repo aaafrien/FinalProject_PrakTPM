@@ -59,11 +59,11 @@ class _AddQuoteState extends State<AddQuote> {
                             author: _authorController.text,
                             quotes: _quoteController.text,
                             time: DateTime.now()));
+                        _quoteController.clear();
+                        _authorController.clear();
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/navbar', (route) => false);
                       }
-                      _quoteController.clear();
-                      _authorController.clear();
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/navbar', (route) => false);
                     },
                     child: Text("Add Quote",
                         style: TextStyle(fontWeight: FontWeight.bold)),
